@@ -11,4 +11,4 @@ This is suppose to use a user account which can be marked as self botting. It ca
 ## Built with ❤️ by
 
 * [Aldas](https://github.com/AXDZ) - The creator of the script
-* [Trial](https://github.com/Giggl3z) - Made this thing originally that inspired me to remake it
+* [Trial](https://github.com/Giggl3z) - Made this thing originally that inspired me to remake it myself
