@@ -3,7 +3,7 @@ A golang based script which uses an user account to rapidly change a group name 
 
 # USAGE
 You will need to install [colors](https://github.com/fatih/color) package and then replace token variable in the script
-. Then you will be able to run it by simply doing command ```go run discrasher.go```
+. Then you will be able to run it by simply doing command ```go run discrasher.go```. Also keep in mind you will need golang installed for this to work!
 
 # Built with ❤️ by
 
