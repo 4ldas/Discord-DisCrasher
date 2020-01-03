@@ -1,8 +1,8 @@
 # DisCrasher [![MIT License](https://img.shields.io/badge/LICENSE-MIT-brightgreen?style=for-the-badge)](https://github.com/AXDZ/LOOKIP/blob/master/LICENSE)
-A golang based script which uses an user account to rapidly change a group name which causes the discord to crash. This has been patched as of 2020-01-03!
+A golang based script which uses an user account to rapidly change a group name which causes the discord to crash. This has been patched as of 2020-01-02!
 
 ## UPDATE
-This has been patched as of 2020-01-03 and this script no longer has any use!
+This has been patched as of 2020-01-02 and this script no longer has any use!
 
 ## USAGE
 You will need to install [colors](https://github.com/fatih/color) package and then replace token variable with an user token in the script
