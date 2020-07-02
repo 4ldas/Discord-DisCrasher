@@ -14,7 +14,7 @@ struct Opts {
 }
 
 fn main() {
-    println!("Starting the crasher...");
+    println!("Starting the crasher. Press ctrl + c at the same time to escape!");
     let opts: Opts = Opts::parse();
     let options = std::sync::Arc::new(opts);
     let threads: Vec<_> = (0..options.threads).map(|_| {
