@@ -1,5 +1,5 @@
 # DisCrasher
-A rust based script which uses a bot's or user's account to rapidly change a guild name/settings which causes the discord to lag/freeze and even crash!
+A rust based CLI application which uses a bot's or user's account to rapidly change a guild name/settings which causes the discord to lag/freeze and even crash!
 
 ## DOWNLOAD
 You can download the bin at the [releases page](https://github.com/AXDZ/DisCrasher/releases "releases page")
