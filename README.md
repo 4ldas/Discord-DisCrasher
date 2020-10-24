@@ -12,7 +12,3 @@ You can add a ```-h``` parameter at the end to see all parameters. This is CLI a
 
 ## DISCLAIMER
 If you use a discord user account this can be marked self botting. As far as im aware if you do it as a bot it can also be marked as a api abuse! It can result in your discord account termination. Im not responsible for your actions.
-
-## Built with ❤️ by
-
-* [Aldas](https://github.com/faith) - The creator of the script
