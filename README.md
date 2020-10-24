@@ -15,4 +15,4 @@ If you use a discord user account this can be marked self botting. As far as im 
 
 ## Built with ❤️ by
 
-* [Aldas](https://github.com/AXDZ) - The creator of the script
+* [Aldas](https://github.com/faith) - The creator of the script
