@@ -21,7 +21,7 @@ fn main() {
         let opts = Arc::clone(&options);
         std::thread::spawn(move || {
             loop {
-                run(&opts.token, opts.guild_id)
+                run(&opts.token, &opts.guild_id, &4 as usize)
             }
         })
     }).collect();
@@ -30,7 +30,7 @@ fn main() {
     };
 }
 
-fn run(token: &str, guild_id: &usize) {
+fn run(token: &str, guild_id: &usize, length: &usize) {
     match change_settings(token, guild_id, &GuildSettings{
         afk_channel_id: None,
         afk_timeout: None,
@@ -39,7 +39,7 @@ fn run(token: &str, guild_id: &usize) {
         description: None,
         explicit_content_filter: None,
         icon: None,
-        name: Some(rand_string()),
+        name: Some(rand_string(length)),
         public_updates_channel_id: None,
         region: None,
         splash: None,
@@ -47,12 +47,12 @@ fn run(token: &str, guild_id: &usize) {
         system_channel_id: None,
         verification_level: None
     }) {
-        Ok(_) => log::info!("Changed succesfully"),
+        Ok(_) => println!("Changed succesfully"),
         Err(text) => panic!("{}\nError has occured ^", text)
     };
 }
 
-fn rand_string(length: usize) -> String {
+fn rand_string(length: &usize) -> String {
     (0..length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
 }
 
@@ -88,14 +88,15 @@ struct GuildSettings {
     verification_level: Option<u8>
 }
 
-fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), &str> {
+fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), StatusCode> {
     let req = reqwest::blocking::Client::new()
     .patch(&format!("https://discord.com/api/v6/guilds/{}", guild_id))
     .header("authorization", token)
     .json(&settings)
     .send()
     .unwrap();
-    return req.status();
+
+    return Some(req.status());
     /*
     match req.status() {
         StatusCode::OK => return Ok(()),
