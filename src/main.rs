@@ -53,7 +53,7 @@ fn run(token: &str, guild_id: &usize, length: &usize) {
 }
 
 fn rand_string(length: &usize) -> String {
-    (0..&length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
+    (0..*length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
 }
 
 #[derive(Serialize)]
@@ -88,7 +88,7 @@ struct GuildSettings {
     verification_level: Option<u8>
 }
 
-fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), StatusCode> {
+fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<StatusCode, dyn<Box<std::error::Error>>> {
     let req = reqwest::blocking::Client::new()
     .patch(&format!("https://discord.com/api/v6/guilds/{}", guild_id))
     .header("authorization", token)
@@ -96,7 +96,7 @@ fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> R
     .send()
     .unwrap();
 
-    return Some(req.status().unwrap());
+    return Ok(req.status());
     /*
     match req.status() {
         StatusCode::OK => return Ok(()),
