@@ -47,7 +47,7 @@ fn run(token: &str, guild_id: &usize, length: &usize) {
         system_channel_id: None,
         verification_level: None
     }) {
-        Ok(_) => println!("Changed succesfully"),
+        Ok(_) => {},
         Err(text) => panic!("{}\nError has occured ^", text)
     };
 }
@@ -88,7 +88,7 @@ struct GuildSettings {
     verification_level: Option<u8>
 }
 
-fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<StatusCode, dyn<Box<std::error::Error>>> {
+fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), Box<std::error::Error>) {
     let req = reqwest::blocking::Client::new()
     .patch(&format!("https://discord.com/api/v6/guilds/{}", guild_id))
     .header("authorization", token)
@@ -96,8 +96,6 @@ fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> R
     .send()
     .unwrap();
 
-    return Ok(req.status());
-    /*
     match req.status() {
         StatusCode::OK => return Ok(()),
         StatusCode::FORBIDDEN => return Err("Forbidden"),
@@ -105,5 +103,4 @@ fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> R
         StatusCode::TOO_MANY_REQUESTS => return Err("Got ratelimited. Either its trying to do something else or it has been patched."),
         _ => return Err("Unknown error has occurred")
     };
-    */
 }
