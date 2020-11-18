@@ -1,7 +1,8 @@
 use reqwest::StatusCode;
 use std::sync::Arc;
+use clap::Clap;
 
-#[derive(clap::Clap)]
+#[derive(Clap)]
 #[clap(version = "2.0", author = "Aldas <aldas.me>")]
 struct Opts {
     #[clap(short, long)]
@@ -96,9 +97,9 @@ fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> R
 
     match req.status() {
         StatusCode::OK => return Ok(()),
-        StatusCode::FORBIDDEN => return Err("Forbidden"),
-        StatusCode::UNAUTHORIZED => return Err("Invalid token or you don't have permissions to manage that server!"),
-        StatusCode::TOO_MANY_REQUESTS => return Err("Got ratelimited. Either its trying to do something else or it has been patched."),
-        _ => return Err("Unknown error has occurred")
+        StatusCode::FORBIDDEN => return Err(Box::new("Forbidden")),
+        StatusCode::UNAUTHORIZED => return Err(Box::new("Invalid token or you don't have permissions to manage that server!")),
+        StatusCode::TOO_MANY_REQUESTS => return Err(Box::new("Got ratelimited. Either its trying to do something else or it has been patched.")),
+        _ => return Err(Box::new("Unknown error has occurred"))
     };
 }
