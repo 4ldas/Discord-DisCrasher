@@ -21,7 +21,7 @@ fn main() {
         let opts = Arc::clone(&options);
         std::thread::spawn(move || {
             loop {
-                run(&opts.token, &opts.guild_id, &4 as usize)
+                run(&opts.token, &opts.guild_id, &(4 as usize))
             }
         })
     }).collect();
@@ -53,7 +53,7 @@ fn run(token: &str, guild_id: &usize, length: &usize) {
 }
 
 fn rand_string(length: &usize) -> String {
-    (0..length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
+    (0..&length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
 }
 
 #[derive(Serialize)]
@@ -96,7 +96,7 @@ fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> R
     .send()
     .unwrap();
 
-    return Some(req.status());
+    return Some(req.status().unwrap());
     /*
     match req.status() {
         StatusCode::OK => return Ok(()),
