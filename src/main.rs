@@ -1,9 +1,7 @@
-use serde::Serialize;
 use reqwest::StatusCode;
-use clap::Clap;
 use std::sync::Arc;
 
-#[derive(Clap)]
+#[derive(clap::Clap)]
 #[clap(version = "2.0", author = "Aldas <aldas.me>")]
 struct Opts {
     #[clap(short, long)]
@@ -56,7 +54,7 @@ fn rand_string(length: &usize) -> String {
     (0..*length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
 }
 
-#[derive(Serialize)]
+#[derive(serde::Serialize)]
 struct GuildSettings {
     #[serde(skip_serializing_if = "Option::is_none")]
     afk_channel_id: Option<usize>,
@@ -88,7 +86,7 @@ struct GuildSettings {
     verification_level: Option<u8>
 }
 
-fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), dyn std::error::Error> {
+fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), Box<dyn std::error::Error>> {
     let req = reqwest::blocking::Client::new()
     .patch(&format!("https://discord.com/api/v6/guilds/{}", guild_id))
     .header("authorization", token)
