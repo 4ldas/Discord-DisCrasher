@@ -16,10 +16,9 @@ struct Opts {
 
 fn main() {
     println!("Starting the crasher. Press ctrl + c at the same time to escape!");
-    let opts: Opts = Opts::parse();
-    let options = std::sync::Arc::new(opts);
+    let options: Arc<Opts> = Arc::new(Opts::parse());
     let threads: Vec<_> = (0..options.threads).map(|_| {
-        let opts = std::sync::Arc::clone(&options);
+        let opts = Arc::clone(&options);
         std::thread::spawn(move || {
             loop {
                 run(&opts.token, opts.guild_id)
