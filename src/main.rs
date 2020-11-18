@@ -88,7 +88,7 @@ struct GuildSettings {
     verification_level: Option<u8>
 }
 
-fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), Box<std::error::Error>) {
+fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), Box<std::error::Error>> {
     let req = reqwest::blocking::Client::new()
     .patch(&format!("https://discord.com/api/v6/guilds/{}", guild_id))
     .header("authorization", token)
