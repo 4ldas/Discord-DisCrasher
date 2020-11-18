@@ -1,6 +1,7 @@
 use serde::Serialize;
 use reqwest::StatusCode;
 use clap::Clap;
+use std::sync::Arc;
 
 #[derive(Clap)]
 #[clap(version = "2.0", author = "Aldas <aldas.me>")]
@@ -30,8 +31,8 @@ fn main() {
     };
 }
 
-fn run(token: &str, guild_id: usize) {
-    match change_settings(token, guild_id, GuildSettings{
+fn run(token: &str, guild_id: &usize) {
+    match change_settings(token, guild_id, &GuildSettings{
         afk_channel_id: None,
         afk_timeout: None,
         banner: None,
@@ -52,8 +53,8 @@ fn run(token: &str, guild_id: usize) {
     };
 }
 
-fn rand_string() -> String {
-    (0..4).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
+fn rand_string(length: usize) -> String {
+    (0..length).map(|_| (0x20u8 + (rand::random::<f32>() * 96.0) as u8) as char).collect()
 }
 
 #[derive(Serialize)]
@@ -88,13 +89,15 @@ struct GuildSettings {
     verification_level: Option<u8>
 }
 
-fn change_settings(token: &str, guild_id: usize, settings: GuildSettings) -> Result<(), &str> {
+fn change_settings(token: &str, guild_id: &usize, settings: &GuildSettings) -> Result<(), &str> {
     let req = reqwest::blocking::Client::new()
     .patch(&format!("https://discord.com/api/v6/guilds/{}", guild_id))
     .header("authorization", token)
     .json(&settings)
     .send()
     .unwrap();
+    return req.status();
+    /*
     match req.status() {
         StatusCode::OK => return Ok(()),
         StatusCode::FORBIDDEN => return Err("Forbidden"),
@@ -102,4 +105,5 @@ fn change_settings(token: &str, guild_id: usize, settings: GuildSettings) -> Res
         StatusCode::TOO_MANY_REQUESTS => return Err("Got ratelimited. Either its trying to do something else or it has been patched."),
         _ => return Err("Unknown error has occurred")
     };
+    */
 }
