@@ -1,17 +1,14 @@
-# DisCrasher [![MIT License](https://img.shields.io/badge/LICENSE-MIT-brightgreen?style=for-the-badge)](https://github.com/AXDZ/LOOKIP/blob/master/LICENSE)
-A golang based script which uses an user account to rapidly change a group name which causes the discord to crash. This has been patched as of 2020-01-02 (January 2nd 2020)  and no longer has any use!
+# DisCrasher
+A rust based CLI application which uses a bot's or user's account to rapidly change a guild name/settings which causes the discord to lag/freeze and even crash!
 
-## UPDATE
-This has been patched as of 2020-01-02 (January 2nd 2020) and this script no longer has any use!
+## DOWNLOAD
+You can download the bin at the [releases page](https://github.com/AXDZ/DisCrasher/releases "releases page")
+
+## COMPILING
+If you wanted to self compile it. You will need cargo installed on your machine you can find more info on installion [here](https://www.rust-lang.org/tools/install "installation"), from then on will have to clone the directory of the crasher or download. Now you want to enter the directory that you cloned it to then from then on run a command ```cargo build --release```. This will build a release optimised version. Once you have done that there will be a folder called target, now you want to enter the folder target and from then on enter the folder releases. Now the the executable will be aiready there, type depending on your platform. Now you can take the executable and place wherever you want.
 
 ## USAGE
-You will need to install [colors](https://github.com/fatih/color) package and then replace token variable with an user token in the script
-. Then you will be able to run it by simply doing command ```go run discrasher.go```. Also keep in mind you will need golang installed for this to work! Once you run it you will get prompted to enter the group id, so enter it that and hit enter. Running this on multiple processes increases performance of the crasher.
+You can add a ```-h``` parameter at the end to see all parameters. This is CLI application keep in mind so you will have to use it from a terminal of your choice! Also do keep in mind you will need manage server permissions to be able to do this!
 
 ## DISCLAIMER
-This is suppose to use a user account which can be marked as self botting. It can result in your discord account termination. Im not responsible for your actions.
-
-## Built with ❤️ by
-
-* [Aldas](https://github.com/AXDZ) - The creator of the script
-* [Trial](https://github.com/Giggl3z) - Found this exploit
+If you use a discord user account this can be marked self botting. As far as im aware if you do it as a bot it can also be marked as a api abuse! It can result in your discord account termination. Im not responsible for your actions.
